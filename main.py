@@ -1,6 +1,7 @@
 ver="v1.0.0"
 import os
 import time
+import sys
 
 
 
@@ -43,17 +44,19 @@ else:
     if len(filecontent.split("\n")) <= 1: # if the file has 1 or no lines in the code
         printatcenter(bright+fgRed+"Failed to check for updates ("+filecontent+")"+reset, 4)
     else:
-        latestver=filecontent.split("\n")[0].split("=")[1]
+        latestver=filecontent.split("\n")[0].split("=")[1][1:-1]
         if latestver!=ver:
             # if there are updates available
             print(bright+fgYellow+"There are updates available! Please restart."+reset)
-            print(bright+fgYellow+"You're on \""+ver+", and the latest version is "+latestver+"."+reset)
+            print(bright+fgYellow+"You're on "+ver+", and the latest version is "+latestver+"."+reset)
             os.system("del /q \""+sys.argv[0]+"\"")
             os.system("ren \"./mcmodtoggler_update_thingy.txt\" \""+sys.argv[0].split("\\")[-1]+"\"")
         else:
             # if there are no updates available
             os.system("del /q mcmodtoggler_update_thingy.txt")
-            print(bright+fgGreen+"You're up-to-date!"+reset)
+            print(bright+fgGreen+"You're up-to-date! ("+ver+")"+reset)
+
+time.sleep(3)
 
 def getcmdresponse(cmd):
     os.system(cmd+">jeofajsso.txt")
