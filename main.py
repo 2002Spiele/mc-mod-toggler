@@ -1,5 +1,5 @@
 ver="v1.1.1"
-import os#
+import os
 import time
 import sys
 
@@ -103,7 +103,6 @@ while True:
             break
         filename=mod[modstartindex:]
         try:
-            print(filename)
             open(filename).close()
             mods+=[filename]
         except Exception:
