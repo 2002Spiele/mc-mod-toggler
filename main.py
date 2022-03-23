@@ -1,4 +1,4 @@
-ver="v1.0.0"
+ver="v1.1.0"
 import os
 import time
 import sys
@@ -89,9 +89,22 @@ while True:
         time.sleep(1)
         os.chdir("mods")
     mods=[]
+    modstartindex=0
     for mod in getcmdresponse("dir").split("\n"):
-        filename=mod[36:]
+        if modstartindex==0 and ("<DIR>" in mod):
+            if ".minecraft" in mod: continue
+            if "." in mod[mod.index("<DIR>"):]:
+                modstartindex=mod.index(" .")+1
+    print(modstartindex)
+
+    for mod in getcmdresponse("dir").split("\n"):
+        if modstartindex==0:
+            print("Something went wrong when fetching the mods.")
+            time.sleep(10)
+            break
+        filename=mod[modstartindex:]
         try:
+            print(filename)
             open(filename).close()
             mods+=[filename]
         except Exception:
