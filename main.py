@@ -1,4 +1,4 @@
-ver="v1.1.0"
+ver="v1.1.1"
 import os#
 import time
 import sys
@@ -95,7 +95,6 @@ while True:
             if ".minecraft" in mod: continue
             if "." in mod[mod.index("<DIR>"):]:
                 modstartindex=mod.index(" .")+1
-    print(modstartindex)
 
     for mod in getcmdresponse("dir").split("\n"):
         if modstartindex==0:
